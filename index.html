@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VENBO - Relojes Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #000;
+        }
+
+        /* ========== INDEX PAGE ========== */
+        .index-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(20,20,40,0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23111" width="1200" height="800"/><circle cx="300" cy="200" r="150" fill="%23222"/><circle cx="900" cy="600" r="200" fill="%231a1a2e"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .index-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,215,0,0.1), transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255,215,0,0.5);
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #fff;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .tiktok-message {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 20px;
+            padding: 30px 25px;
+            margin: 30px 0;
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 40px rgba(255,215,0,0.2);
+        }
+
+        .tiktok-message p {
+            color: #FFD700;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .tiktok-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 350px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 18px 30px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-catalog {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+        }
+
+        .btn-catalog:active {
+            transform: scale(0.95);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-whatsapp:active {
+            transform: scale(0.95);
+            box-shadow: 0 5px 15px rgba(37,211,102,0.4);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== CATALOG PAGE ========== */
+        .catalog-page {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+            padding: 20px 15px 80px;
+        }
+
+        .catalog-header {
+            text-align: center;
+            padding: 30px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .catalog-header h1 {
+            font-size: 36px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+
+        .catalog-header p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .watch-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255,215,0,0.2);
+            animation: slideIn 0.6s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .gallery {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .gallery-container {
+            display: flex;
+            transition: transform 0.4s ease-out;
+            height: 100%;
+        }
+
+        .gallery-image {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #FFD700;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .watch-info {
+            padding: 20px;
+        }
+
+        .watch-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .watch-description {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .watch-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .btn-buy {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            transition: all 0.3s;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-buy:active {
+            transform: scale(0.95);
+            box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+        }
+
+        .btn-back {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+            transition: all 0.3s;
+        }
+
+        .btn-back:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        /* Extra Models Section */
+        .extra-models {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255,215,0,0.05);
+            border-radius: 15px;
+            border: 2px dashed rgba(255,215,0,0.3);
+        }
+
+        .extra-models h2 {
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .extra-models p {
+            color: #aaa;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Placeholder Images */
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e, #2a2a4e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- INDEX PAGE -->
+    <div class="index-page" id="indexPage">
+        <div class="logo-container">
+            <div class="logo">VENBO</div>
+            <div class="subtitle">Envíos a nivel nacional</div>
+        </div>
+
+        <div class="tiktok-message">
+            <div class="tiktok-icon">📱</div>
+            <p>SÍGUENOS EN NUESTRA CUENTA DE TIK TOK PARA QUE CUANDO ESTEMOS EN LIVE PUEDAS APROVECHAR LOS PRECIOS ESPECIALES DE LIVE</p>
+        </div>
+
+        <div class="button-container">
+            <a href="#" class="btn btn-catalog" onclick="showCatalog(event)">
+                ⌚ CATÁLOGO DE RELOJES
+            </a>
+            <a href="https://wa.me/59176026632?text=Hola,%20estoy%20interesado%20en%20relojes%20por%20favor%20me%20puede%20indicar%20para%20adquirirlo" class="btn btn-whatsapp" target="_blank">
+                💬 CONTACTO WHATSAPP
+            </a>
+        </div>
+    </div>
+
+    <!-- CATALOG PAGE -->
+    <div class="catalog-page" id="catalogPage" style="display: none;">
+        <div class="catalog-header">
+            <h1>CATÁLOGO VENBO</h1>
+            <p>Relojes Premium</p>
+        </div>
+
+        <div id="catalogContainer"></div>
+
+        <div class="extra-models">
+            <h2>🔒 MODELOS ADICIONALES</h2>
+            <p>Sección preparada para activar nuevos modelos rápidamente</p>
+        </div>
+
+        <a href="#" class="btn-back" onclick="showIndex(event)">← VOLVER AL INICIO</a>
+    </div>
+
+    <script>
+        // Watch data
+        const watches = [
+            {
+                name: "CASIO VINTAGE VARÓN",
+                description: "Estilo retro clásico con diseño digital icónico",
+                price: "Bs 150",
+                images: 7
+            },
+            {
+                name: "CASIO VINTAGE DAMA",
+                description: "Elegancia vintage en tamaño delicado",
+                price: "Bs 140",
+                images: 7
+            },
+            {
+                name: "CASIO CLÁSICO VARÓN Y DAMA",
+                description: "Diseño atemporal para cualquier ocasión",
+                price: "Bs 160",
+                images: 7
+            },
+            {
+                name: "CASIO GSHOCK DEPORTIVO",
+                description: "Resistencia extrema para aventureros",
+                price: "Bs 200",
+                images: 7
+            },
+            {
+                name: "CASIO OLD MONEY",
+                description: "Lujo discreto y sofisticación absoluta",
+                price: "Bs 220",
+                images: 7
+            },
+            {
+                name: "CASIO AP",
+                description: "Inspiración premium en cada detalle",
+                price: "Bs 230",
+                images: 7
+            },
+            {
+                name: "CASIO ELEGANTE",
+                description: "Refinamiento y distinción en tu muñeca",
+                price: "Bs 180",
+                images: 7
+            },
+            {
+                name: "CURREN RICHARD MILLE",
+                description: "Diseño deportivo de alta gama",
+                price: "Bs 250",
+                images: 7
+            },
+            {
+                name: "BULGARI",
+                description: "Lujo italiano en formato reloj",
+                price: "Bs 280",
+                images: 7
+            },
+            {
+                name: "PATEK PHILIPPE",
+                description: "La cumbre de la relojería suiza",
+                price: "Bs 300",
+                images: 7
+            },
+            {
+                name: "HUBLOT",
+                description: "Innovación y arte en tu tiempo",
+                price: "Bs 290",
+                images: 7
+            },
+            {
+                name: "ROLEX",
+                description: "El símbolo definitivo de éxito",
+                price: "Bs 320",
+                images: 7
+            },
+            {
+                name: "CITIZEN",
+                description: "Tecnología japonesa de precisión",
+                price: "Bs 190",
+                images: 7
+            }
+        ];
+
+        // Generate WhatsApp link
+        function generateWhatsAppLink(watchName, price) {
+            const message = `QUIERO ESTE RELOJ: ${watchName} - PRECIO: ${price}. ¿ESTÁ DISPONIBLE?`;
+            return `https://wa.me/59176026632?text=${encodeURIComponent(message)}`;
+        }
+
+        // Create gallery HTML
+        function createGallery(watchName, imageCount) {
+            let imagesHTML = '';
+            let dotsHTML = '';
+            
+            for (let i = 0; i < imageCount; i++) {
+                imagesHTML += `
+                    <div class="placeholder-img gallery-image">
+                        ${watchName}<br>Imagen ${i + 1}
+                    </div>
+                `;
+                dotsHTML += `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(this, ${i})"></span>`;
+            }
+
+            return `
+                <div class="gallery">
+                    <div class="gallery-container">
+                        ${imagesHTML}
+                    </div>
+                    <div class="gallery-dots">
+                        ${dotsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render catalog
+        function renderCatalog() {
+            const container = document.getElementById('catalogContainer');
+            container.innerHTML = watches.map(watch => `
+                <div class="watch-card">
+                    ${createGallery(watch.name, watch.images)}
+                    <div class="watch-info">
+                        <div class="watch-name">${watch.name}</div>
+                        <div class="watch-description">${watch.description}</div>
+                        <div class="price-container">
+                            <div class="watch-price">${watch.price}</div>
+                        </div>
+                        <a href="${generateWhatsAppLink(watch.name, watch.price)}" 
+                           class="btn-buy" 
+                           target="_blank">
+                            💬 COMPRAR AHORA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 8 IMÁGENES ADICIONALES COMENTADAS (Total 15 por modelo) -->
+                <!--
+                <div class="placeholder-img gallery-image">${watch.name} Imagen 8</div>
+                <div class="placeholder-img gallery-image">${watch.name} Imagen 9</div>
+                <div class="placeholder-img gallery-image">${watch.name} Imagen 10</div>
+                <div class="placeholder-img gallery-image">${watch.name} Imagen 11</div>
+                <div class="placeholder-img gallery-image">${watch.name} Imagen 12</div>
+                <div class="placeholder-img gallery-image">${watch.name} Imagen 13</div>
+                <div class="placeholder-img gallery-image">${watch.name} Imagen 14</div>
+                <div class="placeholder-img gallery-image">${watch.name} Imagen 15</div>
+                -->
+            `).join('');
+        }
+
+        // Gallery navigation
+        function goToSlide(dotElement, index) {
+            const card = dotElement.closest('.watch-card');
+            const container = card.querySelector('.gallery-container');
+            const dots = card.querySelectorAll('.dot');
+            
+            container.style.transform = `translateX(-${index * 100}%)`;
+            
+            dots.forEach(dot => dot.classList.remove('active'));
+            dotElement.classList.add('active');
+        }
+
+        // Auto-slide galleries
+        let slideIntervals = [];
+
+        function startAutoSlide() {
+            const galleries = document.querySelectorAll('.gallery');
+            galleries.forEach((gallery, galleryIndex) => {
+                let currentSlide = 0;
+                const dots = gallery.querySelectorAll('.dot');
+                const container = gallery.querySelector('.gallery-container');
+                
+                const interval = setInterval(() => {
+                    currentSlide = (currentSlide + 1) % dots.length;
+                    container.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    dots[currentSlide].classList.add('active');
+                }, 3000);
+                
+                slideIntervals.push(interval);
+            });
+        }
+
+        function stopAutoSlide() {
+            slideIntervals.forEach(interval => clearInterval(interval));
+            slideIntervals = [];
+        }
+
+        // Page navigation
+        function showCatalog(e) {
+            e.preventDefault();
+            document.getElementById('indexPage').style.display = 'none';
+            document.getElementById('catalogPage').style.display = 'block';
+            renderCatalog();
+            startAutoSlide();
+            window.scrollTo(0, 0);
+        }
+
+        function showIndex(e) {
+            e.preventDefault();
+            stopAutoSlide();
+            document.getElementById('catalogPage').style.display = 'none';
+            document.getElementById('indexPage').style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+
+        /* ========================================
+           MODELOS EXTRA COMENTADOS - LISTOS PARA ACTIVAR
+           ========================================
+           
+           Para activar un nuevo modelo, copia el siguiente código
+           y añádelo al array "watches" arriba:
+           
+        {
+            name: "NOMBRE DEL NUEVO RELOJ",
+            description: "Descripción del nuevo modelo",
+            price: "Bs XXX",
+            images: 7
+        },
+
+        EJEMPLOS DE MODELOS ADICIONALES LISTOS:
+
+        {
+            name: "OMEGA SEAMASTER",
+            description: "Elegancia submarina de lujo",
+            price: "Bs 310",
+            images: 7
+        },
+        {
+            name: "TAG HEUER CARRERA",
+            description: "Precisión cronométrica deportiva",
+            price: "Bs 275",
+            images: 7
+        },
+        {
+            name: "BREITLING NAVITIMER",
+            description: "Instrumento de aviación profesional",
+            price: "Bs 295",
+            images: 7
+        },
+        {
+            name: "CARTIER SANTOS",
+            description: "Icono francés de elegancia",
+            price: "Bs 285",
+            images: 7
+        },
+        {
+            name: "SEIKO PROSPEX",
+            description: "Fiabilidad japonesa extrema",
+            price: "Bs 170",
+            images: 7
+        }
+
+        ======================================== */
+    </script>
+</body>
+</html>
