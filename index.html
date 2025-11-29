@@ -262,12 +262,18 @@
             height: 300px;
             overflow: hidden;
             background: #000;
+            touch-action: pan-y pinch-zoom;
         }
 
         .gallery-container {
             display: flex;
-            transition: transform 0.4s ease-out;
+            transition: transform 0.3s ease-out;
             height: 100%;
+            cursor: grab;
+        }
+
+        .gallery-container:active {
+            cursor: grabbing;
         }
 
         .gallery-image {
@@ -693,30 +699,109 @@
             dotElement.classList.add('active');
         }
 
-        // Auto-slide galleries
-        let slideIntervals = [];
-
-        function startAutoSlide() {
+        // Touch/Swipe functionality for galleries
+        function initSwipeGalleries() {
             const galleries = document.querySelectorAll('.gallery');
-            galleries.forEach((gallery, galleryIndex) => {
-                let currentSlide = 0;
-                const dots = gallery.querySelectorAll('.dot');
+            
+            galleries.forEach(gallery => {
                 const container = gallery.querySelector('.gallery-container');
-                
-                const interval = setInterval(() => {
-                    currentSlide = (currentSlide + 1) % dots.length;
-                    container.style.transform = `translateX(-${currentSlide * 100}%)`;
-                    dots.forEach(dot => dot.classList.remove('active'));
-                    dots[currentSlide].classList.add('active');
-                }, 3000);
-                
-                slideIntervals.push(interval);
-            });
-        }
+                const dots = gallery.querySelectorAll('.dot');
+                let startX = 0;
+                let currentX = 0;
+                let currentSlide = 0;
+                let isDragging = false;
+                let startTransform = 0;
 
-        function stopAutoSlide() {
-            slideIntervals.forEach(interval => clearInterval(interval));
-            slideIntervals = [];
+                // Touch events
+                gallery.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isDragging = true;
+                    const transform = container.style.transform;
+                    startTransform = transform ? parseInt(transform.match(/-?\d+/)[0]) : 0;
+                    container.style.transition = 'none';
+                });
+
+                gallery.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    currentX = e.touches[0].clientX;
+                    const diff = currentX - startX;
+                    const newTransform = startTransform + diff;
+                    container.style.transform = `translateX(${newTransform}px)`;
+                });
+
+                gallery.addEventListener('touchend', () => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    container.style.transition = 'transform 0.3s ease-out';
+                    
+                    const diff = currentX - startX;
+                    const threshold = 50;
+
+                    if (diff > threshold && currentSlide > 0) {
+                        currentSlide--;
+                    } else if (diff < -threshold && currentSlide < dots.length - 1) {
+                        currentSlide++;
+                    }
+
+                    container.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentSlide);
+                    });
+                });
+
+                // Mouse events for desktop
+                gallery.addEventListener('mousedown', (e) => {
+                    startX = e.clientX;
+                    isDragging = true;
+                    const transform = container.style.transform;
+                    startTransform = transform ? parseInt(transform.match(/-?\d+/)[0]) : 0;
+                    container.style.transition = 'none';
+                    e.preventDefault();
+                });
+
+                gallery.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    currentX = e.clientX;
+                    const diff = currentX - startX;
+                    const newTransform = startTransform + diff;
+                    container.style.transform = `translateX(${newTransform}px)`;
+                });
+
+                gallery.addEventListener('mouseup', () => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    container.style.transition = 'transform 0.3s ease-out';
+                    
+                    const diff = currentX - startX;
+                    const threshold = 50;
+
+                    if (diff > threshold && currentSlide > 0) {
+                        currentSlide--;
+                    } else if (diff < -threshold && currentSlide < dots.length - 1) {
+                        currentSlide++;
+                    }
+
+                    container.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentSlide);
+                    });
+                });
+
+                gallery.addEventListener('mouseleave', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        container.style.transition = 'transform 0.3s ease-out';
+                        container.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    }
+                });
+
+                // Update dots click to update currentSlide
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentSlide = index;
+                    });
+                });
+            });
         }
 
         // Page navigation
@@ -725,13 +810,12 @@
             document.getElementById('indexPage').style.display = 'none';
             document.getElementById('catalogPage').style.display = 'block';
             renderCatalog();
-            startAutoSlide();
+            setTimeout(initSwipeGalleries, 100);
             window.scrollTo(0, 0);
         }
 
         function showIndex(e) {
             e.preventDefault();
-            stopAutoSlide();
             document.getElementById('catalogPage').style.display = 'none';
             document.getElementById('indexPage').style.display = 'flex';
             window.scrollTo(0, 0);
