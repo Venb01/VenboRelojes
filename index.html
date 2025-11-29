@@ -460,81 +460,160 @@
         const watches = [
             {
                 name: "CASIO VINTAGE VARÓN",
-                description: "Estilo retro clásico con diseño digital icónico",
-                price: "Bs 150",
-                images: 7
+                description: "Vintage, acero inoxidable, manilla regulables, resistente al agua",
+                price: "Bs 250",
+                images: [
+                    "v1.jpeg",
+                    "v2.jpeg",
+                    "v3.jpeg",
+                    "v4.jpeg",
+                    "v5.jpeg",
+                    "v6.jpeg",
+                    "v7.jpeg",
+                    "v8.jpeg",
+                    "v9.jpeg",
+                    "v10.jpeg"
+                ]
             },
             {
                 name: "CASIO VINTAGE DAMA",
-                description: "Elegancia vintage en tamaño delicado",
-                price: "Bs 140",
-                images: 7
+                description: "Vintage, acero inoxidable, manilla regulables, resistente al agua",
+                price: "Bs 250",
+                images: [
+                    "vm1.jpeg",
+                    "vm2.jpeg",
+                    "vm3.jpeg",
+                    "vm4.jpeg",
+                    "vm5.jpeg",
+                    "vm6.jpeg",
+                    "vm7.jpeg",
+                    "vm8.jpeg",
+                    "vm9.jpeg"
+                ]
             },
             {
                 name: "CASIO CLÁSICO VARÓN Y DAMA",
-                description: "Diseño atemporal para cualquier ocasión",
-                price: "Bs 160",
-                images: 7
+                description: "Clasico, acero inoxidable, manilla regulables, resistente al agua",
+                price: "Bs 150",
+                images: [
+                    "clas1.jpeg",
+                    "clas2.jpeg",
+                    "clas3.jpeg",
+                    "clas4.jpeg"
+                ]
             },
             {
                 name: "CASIO GSHOCK DEPORTIVO",
                 description: "Resistencia extrema para aventureros",
-                price: "Bs 200",
-                images: 7
+                price: "Bs 250",
+                images: [
+                    "gs1.jpeg",
+                    "gs2.jpeg",
+                    "gs3.jpeg",
+                    "gs4.jpeg",
+                    "gs5.jpeg",
+                    "gs6.jpeg",
+                    "gs7.jpeg",
+                    "gs8.jpeg",
+                    "gs9.jpeg",
+                    "gs10.jpeg",
+                    "gs11.jpeg",
+                    "gs12.jpeg"
+                ]
             },
             {
                 name: "CASIO OLD MONEY",
-                description: "Lujo discreto y sofisticación absoluta",
-                price: "Bs 220",
-                images: 7
+                description: "Old money, acero inoxidable, manilla regulables, resistente al agua",
+                price: "Bs 250",
+                images: [
+                    "old1.jpeg",
+                    "old2.jpeg",
+                    "old3.jpeg",
+                    "old4.jpeg"
+                ]
             },
             {
                 name: "CASIO AP",
-                description: "Inspiración premium en cada detalle",
-                price: "Bs 230",
-                images: 7
+                description: "ModeloAP, acero inoxidable, manilla regulables, resistente al agua",
+                price: "Bs 270",
+                images: [
+                    "ap1.jpeg",
+                    "ap2.jpeg"
+                ]
             },
             {
                 name: "CASIO ELEGANTE",
                 description: "Refinamiento y distinción en tu muñeca",
-                price: "Bs 180",
-                images: 7
+                price: "Bs 270",
+                images: [
+                    "ele1.jpeg",
+                    "ele2.jpeg",
+                    "ele3.jpeg",
+                    "ele4.jpeg",
+                    "ele5.jpeg"
+                ]
             },
             {
-                name: "CURREN RICHARD MILLE",
+                name: "RICHARD MILLE",
                 description: "Diseño deportivo de alta gama",
-                price: "Bs 250",
-                images: 7
+                price: "Bs 400",
+                images: [
+                    "rm1.jpeg",
+                    "rm2.jpeg",
+                    "rm3.jpeg",
+                    "rm4.jpeg"
+                ]
             },
             {
                 name: "BULGARI",
                 description: "Lujo italiano en formato reloj",
-                price: "Bs 280",
-                images: 7
+                price: "Bs 350",
+                images: [
+                    "bul1.jpeg",
+                    "bul2.jpeg",
+                    "bul3.jpeg"
+                ]
             },
             {
                 name: "PATEK PHILIPPE",
                 description: "La cumbre de la relojería suiza",
-                price: "Bs 300",
-                images: 7
+                price: "Bs 450",
+                images: [
+                    "patek.jpeg"
+                ]
             },
             {
                 name: "HUBLOT",
                 description: "Innovación y arte en tu tiempo",
-                price: "Bs 290",
-                images: 7
+                price: "Bs 320",
+                images: [
+                    "hu1.jpeg",
+                    "hu2.jpeg"
+                ]
             },
             {
                 name: "ROLEX",
                 description: "El símbolo definitivo de éxito",
-                price: "Bs 320",
-                images: 7
+                price: "Bs 500",
+                images: [
+                    "rx1.jpeg",
+                    "rx2.jpeg",
+                    "rx3.jpeg",
+                    "rx4.jpeg",
+                    "rx5.jpeg",
+                    "rx6.jpeg",
+                    "rx7.jpeg",
+                    "rx8.jpeg",
+                    "rx9.jpeg"
+                ]
             },
             {
                 name: "CITIZEN",
                 description: "Tecnología japonesa de precisión",
-                price: "Bs 190",
-                images: 7
+                price: "Bs 300",
+                images: [
+                    "citizen1.jpeg"
+                ]
             }
         ];
 
@@ -545,15 +624,13 @@
         }
 
         // Create gallery HTML
-        function createGallery(watchName, imageCount) {
+        function createGallery(watchName, images) {
             let imagesHTML = '';
             let dotsHTML = '';
             
-            for (let i = 0; i < imageCount; i++) {
+            for (let i = 0; i < images.length; i++) {
                 imagesHTML += `
-                    <div class="placeholder-img gallery-image">
-                        ${watchName}<br>Imagen ${i + 1}
-                    </div>
+                    <img src="${images[i]}" alt="${watchName} - Imagen ${i + 1}" class="gallery-image" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-img&quot;>${watchName}<br>Imagen ${i + 1}<br>(Agregue la URL de la imagen)</div>'">
                 `;
                 dotsHTML += `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(this, ${i})"></span>`;
             }
